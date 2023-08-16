@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
+<<<<<<< HEAD
 import Spinner from './Spinner';
 import PropTypes from 'prop-types'
 
+=======
+>>>>>>> 69c0273d9e155ad037a2b92dfa775bef20f8aae4
 export class News extends Component {
   static defaultProps = {
     country: 'in',
