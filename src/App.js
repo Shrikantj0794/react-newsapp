@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import NavBar from './Component/NavBar'
 import News from './Component/News'
 
-export class App extends Component {
+export default class App extends Component {
+
   render() {
     return (
       <div>
         <NavBar/>
-        <News/>
+        <News pageSize={5} country="in" category="science"/>
       </div>
     ) 
   }
 }
 
-export default App
 
