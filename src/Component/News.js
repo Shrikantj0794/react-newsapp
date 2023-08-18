@@ -23,6 +23,15 @@ export class News extends Component {
       page:1
   }
 }
+async UpdateNews(){
+  let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b96566c5a8b841149901e9c44d00e809&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+  this.setState({loading: true});let data = await fetch(url);
+  let parsedData = await data.json()
+  console.log(parsedData); 
+  this.setState({articles: parsedData.articles,
+    totalResults: parsedData.totalResults,
+    loading: false})
+}
 async componentDidMount(){ 
   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b96566c5a8b841149901e9c44d00e809&page=1&pageSize=${this.props.pageSize}`;
   this.setState({loading: true});let data = await fetch(url);
@@ -30,7 +39,9 @@ async componentDidMount(){
   console.log(parsedData); 
   this.setState({articles: parsedData.articles,
     totalResults: parsedData.totalResults,
-    loading: false})}
+    loading: false})
+  }
+
 
 handlePrevClick = async ()=>{
   console.log("Previous");
@@ -69,7 +80,7 @@ render() {
         <div className="row"> 
         {!this.state.loading && this.state.articles.map((element)=>{
                     return <div className="col-md-4" key={element.url}>
-                        <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imageUrl={element.urlToImage} newsUrl={element.url}/>
+                        <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imageUrl={element.urlToImage} newsUrl={element.url}  author={element.author? element.author:"Unknown"} date={element.publishedAt? element.publishedAt:"NA"}/>
                     </div> 
                 })} 
                 </div> 

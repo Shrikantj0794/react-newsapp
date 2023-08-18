@@ -18,11 +18,11 @@ export class NavBar extends Component {
                             <Link className="nav-link" aria-current="page"to="/">Home</Link>
                             </li>
 
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Category
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul className="dropdown-menu">
                             <li className="nav-item"><Link className="nav-link" to="/business">Business</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/entertainment">Entertainment</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/general">General</Link></li>
@@ -32,10 +32,19 @@ export class NavBar extends Component {
                             <li className="nav-item"><Link className="nav-link" to="/technology">Technology</Link></li>
                             </ul>
                             </li>
+                            {/* <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            country wise
+                            </a>
+                            <ul className="dropdown-menu">
+                            <li className="nav-item"><Link className="nav-link" to="/in">IND</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/US">US</Link></li>
+                            </ul>
+                            </li> */}
                             </ul>
                         </div>
                     </div>
-                    </nav>
+                </nav>
             </div>
         )
     }
