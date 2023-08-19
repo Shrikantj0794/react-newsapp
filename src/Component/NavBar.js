@@ -1,9 +1,6 @@
-import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 
-export class NavBar extends Component {
-
-    render() {
+    const NavBar =()=>{
         return (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,15 +29,6 @@ export class NavBar extends Component {
                             <li className="nav-item"><Link className="nav-link" to="/technology">Technology</Link></li>
                             </ul>
                             </li>
-                            {/* <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            country wise
-                            </a>
-                            <ul className="dropdown-menu">
-                            <li className="nav-item"><Link className="nav-link" to="/in">IND</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/US">US</Link></li>
-                            </ul>
-                            </li> */}
                             </ul>
                         </div>
                     </div>
@@ -48,6 +36,6 @@ export class NavBar extends Component {
             </div>
         )
     }
-}
+
 
 export default NavBar
