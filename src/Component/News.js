@@ -30,15 +30,19 @@ export class News extends Component {
   document.title = `NewsApp - ${this.capitalizeFirstLetter(this.props.category)}`
 }
 async UpdateNews(){
+  this.props.setProgress(10); //top loading bar
   const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b96566c5a8b841149901e9c44d00e809&page=${this.state.page}&pageSize=${this.props.pageSize}`;
   this.setState({loading: true});let data = await fetch(url);
+  this.props.setProgress(30);
   let parsedData = await data.json()
-  console.log(parsedData); 
+  this.props.setProgress(60);
   this.setState({
     articles: parsedData.articles,
     totalResults: parsedData.totalResults,
     loading: false})
+    this.props.setProgress(100);
 }
+
 // componentDidMount used for featching api
 async componentDidMount(){ 
     this.UpdateNews();
