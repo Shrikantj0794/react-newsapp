@@ -23,7 +23,7 @@ export class News extends Component {
     super(props);
     this.state = {
       articles: [],
-      loading: false,
+      loading: true,
       page:1,
       totalResults:0
   }
@@ -39,7 +39,8 @@ async UpdateNews(){
   this.setState({
     articles: parsedData.articles,
     totalResults: parsedData.totalResults,
-    loading: false})
+    loading: false,
+  })
     this.props.setProgress(100);
 }
 
@@ -74,28 +75,30 @@ fetchMoreData = async() => {
 
 render() { 
   return (
-      <div className="container my-3">
-        <h1 className="text-center" style={{margin: '35px 0px'}}>NewsApp - Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
-                {this.state.loading && <Spinner/>} 
+        <>
+          <h1 className="text-center" style={{ margin: '35px 0px' }}>NewsApp - Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
+          {this.state.loading && <Spinner />}
           <InfiniteScroll
-              dataLength={this.state.articles.length}
-              next={this.fetchMoreData}
-              hasMore={this.state.articles.length !== this.state.totalResults}
-              loader={<Spinner/>}
-              >
-              <div className="container">
-              <div className="row"> 
-              {this.state.articles.map((element)=>{
-                          return <div className="col-md-4" key={element.url}>
-                              <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imageUrl={element.urlToImage} newsUrl={element.url}  author={element.author? element.author:"Unknown"} date={element.publishedAt? element.publishedAt:"NA"}/>
-                          </div> 
-                      })
-              } 
-              </div>
-              </div>
-         </InfiniteScroll> 
-        </div>
-      )
+                    dataLength={this.state.articles.length}
+                    next={this.fetchMoreData}
+                    hasMore={this.state.articles.length !== this.state.totalResults}
+                    loader={<Spinner/>}
+                > 
+                    <div className="container">
+
+                    <div className="row">
+                        {this.state.articles.map((element) => {
+                            return <div className="col-md-4" key={element.url}>
+                                <NewsItem title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
+                            </div>
+                        })}
+                    </div>
+                    </div> 
+                </InfiniteScroll>
+
+            </>
+        )
     }
-  }
+}
+     
   export default News
