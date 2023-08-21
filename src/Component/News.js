@@ -33,6 +33,7 @@ useEffect(() => {
   UpdateNews();
   //eslint-disable-next-line
 },[])
+
 const fetchMoreData = async() => {
   const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=b96566c5a8b841149901e9c44d00e809&page=${page+1}&pageSize=${props.pageSize}`;
   setPage(page+1)
@@ -42,8 +43,7 @@ const fetchMoreData = async() => {
   setTotalResults(parsedData.totalResults)
   };
   
-
-  return (
+    return (
         <>
           <h1 className="text-center" style={{ margin: '35px 0px', marginTop:'90px' }}>NewsApp - Top {capitalizeFirstLetter(props.category)} Headlines</h1>
           {loading && <Spinner />}
@@ -67,7 +67,7 @@ const fetchMoreData = async() => {
 
             </>
         )
-  }
+    }
     
      
 News.defaultProps = {
@@ -81,4 +81,6 @@ News.propTypes = {
   pageSize: PropTypes.number, 
   category: PropTypes.string,
 }
+
+
   export default News
