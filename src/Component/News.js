@@ -9,13 +9,12 @@ const News = (props)=>{
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-  //document.title = `NewsApp - ${capitalizeFirstLetter(props.category)}`
   
   const capitalizeFirstLetter = (string)=> {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
   
-const UpdateNews = async(props)=>{
+const UpdateNews = async()=>{
   props.setProgress(10); //top loading bar
   const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=b96566c5a8b841149901e9c44d00e809&page=${page}&pageSize=${props.pageSize}`;
   setLoading(true)
@@ -30,32 +29,23 @@ const UpdateNews = async(props)=>{
 }
 
 useEffect(() => {
+  document.title = `NewsApp - ${capitalizeFirstLetter(props.category)}`
   UpdateNews();
-},)
-const handlePrevClick = async ()=>{
-    setPage(page-1)
-    UpdateNews();
-}
-
-const handleNextClick = async ()=>{ 
-    setPage(page+1)
-    UpdateNews();
-}
-const fetchMoreData = async(props) => {
-  setTimeout (async()=>{ 
-    setPage(page+1)
-  const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=b96566c5a8b841149901e9c44d00e809&page=${page}&pageSize=${props.pageSize}`;
+  //eslint-disable-next-line
+},[])
+const fetchMoreData = async() => {
+  const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=b96566c5a8b841149901e9c44d00e809&page=${page+1}&pageSize=${props.pageSize}`;
+  setPage(page+1)
   let data = await fetch(url);
   let parsedData = await data.json()
   setArticles(articles.concat(parsedData.articles))
   setTotalResults(parsedData.totalResults)
-  },500);
+  };
   
-};
 
   return (
         <>
-          <h1 className="text-center" style={{ margin: '35px 0px' }}>NewsApp - Top {capitalizeFirstLetter(props.category)} Headlines</h1>
+          <h1 className="text-center" style={{ margin: '35px 0px', marginTop:'90px' }}>NewsApp - Top {capitalizeFirstLetter(props.category)} Headlines</h1>
           {loading && <Spinner />}
           <InfiniteScroll
                     dataLength={articles.length}
@@ -77,7 +67,8 @@ const fetchMoreData = async(props) => {
 
             </>
         )
-      }
+  }
+    
      
 News.defaultProps = {
   country: 'in',
